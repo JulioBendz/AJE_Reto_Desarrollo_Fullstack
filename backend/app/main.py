@@ -2,7 +2,8 @@ from datetime import datetime
 from random import randint
 
 from app.application.servicio_clientes import ServicioClientes
-from app.infrastructure.memoria import RepositorioEnMemoria
+from app.infrastructure.base_de_datos import Sesion
+from app.infrastructure.repositorio_sqlalchemy import RepositorioSqlAlchemy
 from app.interfaces.api import crear_aplicacion
 
 
@@ -23,7 +24,7 @@ def generar_id_aleatorio() -> int:
 
 aplicacion = crear_aplicacion(
     ServicioClientes(
-        RepositorioEnMemoria(),
+        RepositorioSqlAlchemy(Sesion),
         _ApiPublicaPendiente(),
         generar_id_aleatorio,
         datetime.now,

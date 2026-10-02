@@ -12,18 +12,18 @@ El porcentaje es ítems marcados dividido entre ítems del checklist. Cada ítem
 |        |     |
 | ------ | --- |
 | Ítems  | 25  |
-| Hechos | 0   |
-| Avance | 0 % |
+| Hechos | 3   |
+| Avance | 12 % |
 
 
 
 | Bloque                 | Referencia                                                                                                                                                                                                                                                                                             | Ítems | Hechos |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----- | ------ |
-| Datos                  | [§4.1](spec/reto-desarrollo-fullstack.md#41-base-de-datos)                                                                                                                                                                                                                                             | 2     | 0      |
+| Datos                  | [§4.1](spec/reto-desarrollo-fullstack.md#41-base-de-datos)                                                                                                                                                                                                                                             | 2     | 2      |
 | Backend                | [§4.2](spec/reto-desarrollo-fullstack.md#42-backend-en-nodejs-o-phyton), [§6.4](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.5](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto)                                                                    | 7     | 0      |
 | Integración            | [§4.3](spec/reto-desarrollo-fullstack.md#43-integración-api-pública-retoolcom), [§6.6](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto)                                                                                                                                           | 3     | 0      |
 | Frontend               | [§4.4](spec/reto-desarrollo-fullstack.md#44-frontend), [§6.3](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto)                                                                                                                                                                    | 6     | 0      |
-| Arquitectura y calidad | [§2](spec/reto-desarrollo-fullstack.md#2-objetivos-del-reto), [§6.1](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.2](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.7](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto) | 4     | 0      |
+| Arquitectura y calidad | [§2](spec/reto-desarrollo-fullstack.md#2-objetivos-del-reto), [§6.1](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.2](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.7](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto) | 4     | 1      |
 | Entorno y entrega      | [§6.8](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.9](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§7](spec/reto-desarrollo-fullstack.md#7-entregable)                                                                                       | 3     | 0      |
 
 
@@ -33,8 +33,8 @@ El porcentaje es ítems marcados dividido entre ítems del checklist. Cada ítem
 
 Referencia: [§4.1](spec/reto-desarrollo-fullstack.md#41-base-de-datos) y [§5](spec/reto-desarrollo-fullstack.md#5-tecnologías-recomendadas).
 
-- [ ] PostgreSQL 17 o superior, con la base `retoDB`
-- [ ] Tabla `cliente` con `id`, `nombres`, `email`, `telefono`, `fecha_creacion` y `estado`, y las restricciones del spec
+- [x] PostgreSQL 17 o superior, con la base `retoDB`
+- [x] Tabla `cliente` con `id`, `nombres`, `email`, `telefono`, `fecha_creacion` y `estado`, y las restricciones del spec
 
 
 
@@ -80,7 +80,7 @@ Referencia: [§4.4](spec/reto-desarrollo-fullstack.md#44-frontend) y criterio [3
 Referencia: criterios [1](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [2](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto) y [7](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto).
 
 - [ ] Frontend y backend organizados con Clean Architecture
-- [ ] Persistencia con un ORM sobre PostgreSQL
+- [x] Persistencia con un ORM sobre PostgreSQL
 - [ ] Pruebas unitarias en verde, con flujos de excepción, escritas al estilo TDD
 - [ ] SonarQube en el IDE y scanner con las métricas de calidad cumplidas
 
