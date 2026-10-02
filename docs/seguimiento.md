@@ -12,8 +12,8 @@ El porcentaje es ítems marcados dividido entre ítems del checklist. Cada ítem
 |        |     |
 | ------ | --- |
 | Ítems  | 25  |
-| Hechos | 4   |
-| Avance | 16 % |
+| Hechos | 5   |
+| Avance | 20 % |
 
 
 
@@ -21,7 +21,7 @@ El porcentaje es ítems marcados dividido entre ítems del checklist. Cada ítem
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----- | ------ |
 | Datos                  | [§4.1](spec/reto-desarrollo-fullstack.md#41-base-de-datos)                                                                                                                                                                                                                                             | 2     | 2      |
 | Backend                | [§4.2](spec/reto-desarrollo-fullstack.md#42-backend-en-nodejs-o-phyton), [§6.4](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.5](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto)                                                                    | 7     | 0      |
-| Integración            | [§4.3](spec/reto-desarrollo-fullstack.md#43-integración-api-pública-retoolcom), [§6.6](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto)                                                                                                                                           | 3     | 1      |
+| Integración            | [§4.3](spec/reto-desarrollo-fullstack.md#43-integración-api-pública-retoolcom), [§6.6](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto)                                                                                                                                           | 3     | 2      |
 | Frontend               | [§4.4](spec/reto-desarrollo-fullstack.md#44-frontend), [§6.3](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto)                                                                                                                                                                    | 6     | 0      |
 | Arquitectura y calidad | [§2](spec/reto-desarrollo-fullstack.md#2-objetivos-del-reto), [§6.1](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.2](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.7](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto) | 4     | 1      |
 | Entorno y entrega      | [§6.8](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.9](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§7](spec/reto-desarrollo-fullstack.md#7-entregable)                                                                                       | 3     | 0      |
@@ -56,7 +56,7 @@ Referencia: [§4.2](spec/reto-desarrollo-fullstack.md#42-backend-en-nodejs-o-phy
 
 Referencia: [§4.3](spec/reto-desarrollo-fullstack.md#43-integración-api-pública-retoolcom) y criterio [6](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto).
 
-- [ ] Recurso de prueba creado en Retool y su URL configurada en el backend
+- [x] Recurso de prueba creado en Retool y su URL configurada en el backend
 - [ ] Cada `POST`, `PUT` y `DELETE` del backend llama al API pública antes de tocar la base
 - [x] Circuit breaker en esa integración
 

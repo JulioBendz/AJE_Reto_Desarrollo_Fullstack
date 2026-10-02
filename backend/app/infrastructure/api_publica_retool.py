@@ -1,8 +1,7 @@
-import os
-
 import requests
 from pycircuitbreaker import CircuitBreaker, CircuitBreakerException
 
+from app.configuracion import leer
 from app.domain.errores import ApiPublicaNoDisponible
 
 
@@ -60,7 +59,7 @@ class ApiPublicaSinConfigurar:
 
 
 def crear_api_publica() -> ApiPublicaRetool | ApiPublicaSinConfigurar:
-    url = os.environ.get("RETOOL_API_URL", "").strip()
+    url = leer("RETOOL_API_URL")
     if not url:
         return ApiPublicaSinConfigurar()
     return ApiPublicaRetool(url)

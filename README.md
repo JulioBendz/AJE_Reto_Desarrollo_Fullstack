@@ -67,8 +67,28 @@ python -m venv .venv
 .venv\Scripts\pytest
 ```
 
-La conexión a PostgreSQL ya usa SQLAlchemy. El API de Retool se activa con la URL del recurso generado en [retool.com/api-generator](https://retool.com/api-generator):
+## Configuración local
 
-```bash
-$env:RETOOL_API_URL="https://retoolapi.dev/TU_RECURSO/clientes"
+Las URLs y credenciales de esta máquina van en `backend/.env`. Ese archivo no se sube a Git. La plantilla que sí se versiona es `backend/.env.example`.
+
+```powershell
+cd backend
+copy .env.example .env
 ```
+
+Abre `backend/.env` y reemplaza solo el valor de `RETOOL_API_URL`. No la pegues en el código.
+
+### Cómo obtener la URL de Retool
+
+1. Entra a [https://retool.com/api-generator](https://retool.com/api-generator).
+2. En **Build Your Dataset** crea las columnas del cliente. Pon los títulos `nombres`, `email` y `telefono`. El tipo puede ser texto. El spec permite que el payload externo no coincida exactamente con la tabla.
+3. En **Configuration**, el nombre del API ponlo `clientes`. La cantidad de filas puede ser 50.
+4. Pulsa **Generate API**.
+5. En la pantalla siguiente copia **Endpoint URL**. Se ve así: `https://retoolapi.dev/AbC123/clientes`. Copia esa base, sin un número final como `/1`.
+6. Pégala en `backend/.env`:
+
+```env
+RETOOL_API_URL=https://retoolapi.dev/AbC123/clientes
+```
+
+`DATABASE_URL` ya apunta al PostgreSQL local del `docker compose`. No hace falta cambiarla.
