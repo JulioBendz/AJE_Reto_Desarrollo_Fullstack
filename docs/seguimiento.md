@@ -98,7 +98,7 @@ Referencia: criterios [8](spec/reto-desarrollo-fullstack.md#6-criterios-de-evalu
 
 ## Orden de trabajo
 
-1. Fijar el stack dentro de lo que el reto ya permite. Frontend: React 18, React Router y Fetch API. Backend: Node.js con Express o Python con Flask o FastAPI. ORM del mismo lenguaje: Sequelize o SQLAlchemy. Base: PostgreSQL 17. Bootstrap, Material UI y cualquier librería fuera de esa lista quedan para el final, solo si el reto ya está cumplido.
+1. Stack fijado en [ADR 0001](adr/0001-stack-del-reto.md): React 18, React Router, Fetch API, FastAPI, Requests, Pycircuitbreaker, SQLAlchemy, PostgreSQL 17, Docker Compose, pytest y SonarQube. Sin librería de estilos hasta cerrar el checklist.
 2. `docker-compose` con PostgreSQL y la tabla `cliente`.
 3. Backend por TDD: pruebas de los cinco endpoints, luego Clean Architecture, validación y Swagger.
 4. Cliente de Retool con circuit breaker, enganchado a `POST`, `PUT` y `DELETE`.
