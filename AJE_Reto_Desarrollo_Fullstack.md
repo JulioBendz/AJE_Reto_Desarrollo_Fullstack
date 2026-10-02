@@ -123,7 +123,19 @@ El backend deberá exponer al frontend un API REST con OPEN API 3.0 con los sigu
 
 Se debe crear un API de TEST usando el tool online [https://retool.com/api-generator](https://retool.com/api-generator).
 
+En el generador se arma el dataset de prueba: cada columna tiene título y tipo de dato, y en la configuración se define el nombre del recurso, la cantidad de filas y la URL de vista previa. Al generar el API, Retool publica ese recurso en `retoolapi.dev`.
+
+![Generador de API de Retool con dos columnas, People / Full Name y Numbers / Account ID, recurso data de 50 filas y la vista previa de los registros.](generador-dataset-retool.png)
+
+*Figura 2. Dataset de prueba configurado en el generador de Retool.*
+
 Una vez generada la data de prueba y los endpoints generados usarlos para el reto.
+
+El recurso publicado expone los métodos HTTP sobre una URL con un identificador propio. En el ejemplo de la figura, la base es `https://retoolapi.dev/KI78r6/data`: consulta de todos los registros, filtro, consulta por id, paginación, alta, actualización y baja.
+
+![Endpoints HTTP del recurso de Retool: GET, filtro, consulta por id, paginación, POST, PUT, PATCH y DELETE sobre https://retoolapi.dev/KI78r6/data.](endpoints-http-retool.png)
+
+*Figura 3. Endpoints HTTP generados para el recurso de prueba.*
 
 El Backend debe realizar una petición por cada operación POST, PUT, DELETE a la API publicada, por ejemplo: `https://retoolapi.dev/YOUR_RESOURCE_ID/clientes`.
 
