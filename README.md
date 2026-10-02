@@ -67,4 +67,8 @@ python -m venv .venv
 .venv\Scripts\pytest
 ```
 
-La conexión real a PostgreSQL y el API de Retool se agregan cuando Docker esté disponible.
+La conexión a PostgreSQL ya usa SQLAlchemy. El API de Retool se activa con la URL del recurso generado en [retool.com/api-generator](https://retool.com/api-generator):
+
+```bash
+$env:RETOOL_API_URL="https://retoolapi.dev/TU_RECURSO/clientes"
+```

@@ -5,3 +5,5 @@ httpx
 email-validator
 sqlalchemy
 psycopg[binary]
+requests
+pycircuitbreaker
