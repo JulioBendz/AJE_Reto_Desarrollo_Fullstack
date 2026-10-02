@@ -82,7 +82,7 @@ flowchart LR
     end
 ```
 
-![Arquitectura del reto: el usuario accede al frontend React, este consume el backend en Node.js o Python, y el backend integra la API de Retool y persiste en PostgreSQL. Los tres componentes se ejecutan en Docker.](Imagen1.png)
+![Arquitectura del reto: el usuario accede al frontend React, este consume el backend en Node.js o Python, y el backend integra la API de Retool y persiste en PostgreSQL. Los tres componentes se ejecutan en Docker.](arquitectura-componentes-reto.png)
 
 *Figura 1. Diagrama original de los componentes del reto.*
 
