@@ -2,6 +2,7 @@ from datetime import datetime
 
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
+from fastapi.openapi.utils import get_openapi
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, EmailStr, Field, field_validator
 
@@ -49,8 +50,26 @@ class IdRespuesta(BaseModel):
     id: int
 
 
+class ErrorRespuesta(BaseModel):
+    detalle: str
+
+
+_errores = {
+    400: {"model": ErrorRespuesta, "description": "Datos de entrada invalidos"},
+    404: {"model": ErrorRespuesta, "description": "Cliente no encontrado"},
+    409: {"model": ErrorRespuesta, "description": "El email ya esta registrado"},
+    503: {"model": ErrorRespuesta, "description": "El API publica no esta disponible"},
+}
+
+
 def crear_aplicacion(servicio: ServicioClientes) -> FastAPI:
-    aplicacion = FastAPI(title="Reto clientes", version="1.0.0")
+    aplicacion = FastAPI(
+        title="API de clientes",
+        version="1.0.0",
+        description="CRUD de clientes. En alta, actualizacion y baja llama primero al API publica y despues persiste en PostgreSQL.",
+        docs_url="/docs",
+        openapi_url="/openapi.json",
+    )
 
     @aplicacion.exception_handler(RequestValidationError)
     async def entrada_invalida(_peticion, _error):
@@ -72,28 +91,63 @@ def crear_aplicacion(servicio: ServicioClientes) -> FastAPI:
     async def id_no_disponible(_peticion, _error):
         return JSONResponse(status_code=500, content={"detalle": "No se pudo generar el id del cliente"})
 
-    @aplicacion.post("/api/clientes", status_code=201, response_model=IdRespuesta)
+    @aplicacion.post(
+        "/api/clientes",
+        status_code=201,
+        response_model=IdRespuesta,
+        summary="Crear cliente",
+        responses={codigo: _errores[codigo] for codigo in (400, 409, 503)},
+    )
     def crear(entrada: ClienteEntrada) -> IdRespuesta:
         nuevo_id = servicio.crear(entrada.nombres, str(entrada.email), entrada.telefono)
         return IdRespuesta(id=nuevo_id)
 
-    @aplicacion.get("/api/clientes", response_model=list[ClienteRespuesta])
+    @aplicacion.get("/api/clientes", response_model=list[ClienteRespuesta], summary="Listar clientes activos")
     def listar() -> list[ClienteRespuesta]:
         return [_respuesta(cliente) for cliente in servicio.listar()]
 
-    @aplicacion.get("/api/clientes/{id_cliente}", response_model=ClienteRespuesta)
+    @aplicacion.get(
+        "/api/clientes/{id_cliente}",
+        response_model=ClienteRespuesta,
+        summary="Obtener cliente por id",
+        responses={404: _errores[404]},
+    )
     def obtener(id_cliente: int) -> ClienteRespuesta:
         return _respuesta(servicio.obtener(id_cliente))
 
-    @aplicacion.put("/api/clientes/{id_cliente}", response_model=ClienteRespuesta)
+    @aplicacion.put(
+        "/api/clientes/{id_cliente}",
+        response_model=ClienteRespuesta,
+        summary="Actualizar cliente",
+        responses={codigo: _errores[codigo] for codigo in (400, 404, 409, 503)},
+    )
     def actualizar(id_cliente: int, entrada: ClienteEntrada) -> ClienteRespuesta:
         cliente = servicio.actualizar(id_cliente, entrada.nombres, str(entrada.email), entrada.telefono)
         return _respuesta(cliente)
 
-    @aplicacion.delete("/api/clientes/{id_cliente}", status_code=204)
+    @aplicacion.delete(
+        "/api/clientes/{id_cliente}",
+        status_code=204,
+        summary="Eliminar cliente de forma logica",
+        responses={codigo: _errores[codigo] for codigo in (404, 503)},
+    )
     def eliminar(id_cliente: int) -> None:
         servicio.eliminar(id_cliente)
 
+    def contrato_openapi():
+        if aplicacion.openapi_schema:
+            return aplicacion.openapi_schema
+        esquema = get_openapi(
+            title=aplicacion.title,
+            version=aplicacion.version,
+            description=aplicacion.description,
+            routes=aplicacion.routes,
+        )
+        esquema["openapi"] = "3.0.3"
+        aplicacion.openapi_schema = esquema
+        return esquema
+
+    aplicacion.openapi = contrato_openapi
     return aplicacion
 
 

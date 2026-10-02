@@ -74,6 +74,17 @@ def test_email_duplicado_responde_409():
     assert respuesta.status_code == 409
 
 
+def test_el_contrato_es_openapi_3_y_swagger_lista_los_cinco_metodos():
+    cliente, _repositorio = cliente_http([1])
+    esquema = cliente.app.openapi()
+    rutas = esquema["paths"]
+
+    assert esquema["openapi"].startswith("3.0")
+    assert cliente.app.docs_url == "/docs"
+    assert set(rutas["/api/clientes"]) >= {"get", "post"}
+    assert set(rutas["/api/clientes/{id_cliente}"]) >= {"get", "put", "delete"}
+
+
 def test_api_publica_no_disponible_responde_503():
     cliente, repositorio = cliente_http([3], falla=True)
 

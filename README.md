@@ -91,4 +91,14 @@ Abre `backend/.env` y reemplaza solo el valor de `RETOOL_API_URL`. No la pegues 
 RETOOL_API_URL=https://retoolapi.dev/AbC123/clientes
 ```
 
-`DATABASE_URL` ya apunta al PostgreSQL local del `docker compose`. No hace falta cambiarla.
+`DATABASE_URL` ya apunta al PostgreSQL local del `docker compose`. No hace falta cambiarla. Esa cadena vive solo en `.env`; el código la lee y no la repite.
+
+## Contrato del API
+
+Con la base levantada, desde `backend`:
+
+```powershell
+.\.venv\Scripts\uvicorn app.main:aplicacion --reload
+```
+
+Swagger queda en [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs). El contrato OpenAPI 3 está en [http://127.0.0.1:8000/openapi.json](http://127.0.0.1:8000/openapi.json).
