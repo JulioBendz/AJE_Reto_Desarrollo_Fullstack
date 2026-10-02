@@ -12,8 +12,8 @@ El porcentaje es ítems marcados dividido entre ítems del checklist. Cada ítem
 |        |     |
 | ------ | --- |
 | Ítems  | 25  |
-| Hechos | 13  |
-| Avance | 52 % |
+| Hechos | 20  |
+| Avance | 80 % |
 
 
 
@@ -22,8 +22,8 @@ El porcentaje es ítems marcados dividido entre ítems del checklist. Cada ítem
 | Datos                  | [§4.1](spec/reto-desarrollo-fullstack.md#41-base-de-datos)                                                                                                                                                                                                                                             | 2     | 2      |
 | Backend                | [§4.2](spec/reto-desarrollo-fullstack.md#42-backend-en-nodejs-o-phyton), [§6.4](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.5](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto)                                                                    | 7     | 7      |
 | Integración            | [§4.3](spec/reto-desarrollo-fullstack.md#43-integración-api-pública-retoolcom), [§6.6](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto)                                                                                                                                           | 3     | 3      |
-| Frontend               | [§4.4](spec/reto-desarrollo-fullstack.md#44-frontend), [§6.3](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto)                                                                                                                                                                    | 6     | 0      |
-| Arquitectura y calidad | [§2](spec/reto-desarrollo-fullstack.md#2-objetivos-del-reto), [§6.1](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.2](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.7](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto) | 4     | 1      |
+| Frontend               | [§4.4](spec/reto-desarrollo-fullstack.md#44-frontend), [§6.3](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto)                                                                                                                                                                    | 6     | 6      |
+| Arquitectura y calidad | [§2](spec/reto-desarrollo-fullstack.md#2-objetivos-del-reto), [§6.1](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.2](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.7](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto) | 4     | 2      |
 | Entorno y entrega      | [§6.8](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.9](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§7](spec/reto-desarrollo-fullstack.md#7-entregable)                                                                                       | 3     | 0      |
 
 
@@ -66,12 +66,12 @@ Referencia: [§4.3](spec/reto-desarrollo-fullstack.md#43-integración-api-públi
 
 Referencia: [§4.4](spec/reto-desarrollo-fullstack.md#44-frontend) y criterio [3](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto).
 
-- [ ] SPA en React 18 o superior, con React Router
-- [ ] Registro: formulario con validación, `POST` y listado actualizado con el alta
-- [ ] Consulta: listado con `GET` y acciones de editar y eliminar
-- [ ] Edición: `GET` por id, `PUT` y listado actualizado
-- [ ] Eliminación: `DELETE` y listado sin ese registro
-- [ ] Mensajes de éxito o fallo en las operaciones
+- [x] SPA en React 18 o superior, con React Router
+- [x] Registro: formulario con validación, `POST` y listado actualizado con el alta
+- [x] Consulta: listado con `GET` y acciones de editar y eliminar
+- [x] Edición: `GET` por id, `PUT` y listado actualizado
+- [x] Eliminación: `DELETE` y listado sin ese registro
+- [x] Mensajes de éxito o fallo en las operaciones
 
 
 
@@ -79,7 +79,7 @@ Referencia: [§4.4](spec/reto-desarrollo-fullstack.md#44-frontend) y criterio [3
 
 Referencia: criterios [1](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [2](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto) y [7](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto).
 
-- [ ] Frontend y backend organizados con Clean Architecture
+- [x] Frontend y backend organizados con Clean Architecture
 - [x] Persistencia con un ORM sobre PostgreSQL
 - [ ] Pruebas unitarias en verde, con flujos de excepción, escritas al estilo TDD
 - [ ] SonarQube en el IDE y scanner con las métricas de calidad cumplidas

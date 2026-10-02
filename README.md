@@ -58,7 +58,11 @@ docker compose exec postgres psql -U postgres -d retoDB -c "\d cliente"
 
 ## Pruebas del backend
 
-No requieren Docker. Comprueban los cinco endpoints, el id aleatorio, la baja lógica y los códigos 201, 200, 204, 400, 404, 409 y 503.
+Comprueban los cinco endpoints, el id aleatorio, la baja lógica y los códigos 201, 200, 204, 400, 404, 409 y 503.
+
+La mayoría usa un repositorio en memoria y un Retool falso: no escribe en PostgreSQL ni llama a internet. Dos pruebas sí usan la base `retoDB`, así que el contenedor tiene que estar levantado. El circuito de Retool se prueba interceptando la red, sin salir a `retoolapi.dev`.
+
+El recorrido real, Retool y después PostgreSQL, se hace con el servidor en marcha: desde Swagger o desde la pantalla.
 
 ```bash
 cd backend
@@ -102,3 +106,14 @@ Con la base levantada, desde `backend`:
 ```
 
 Swagger queda en [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs). El contrato OpenAPI 3 está en [http://127.0.0.1:8000/openapi.json](http://127.0.0.1:8000/openapi.json).
+
+## Pantalla
+
+Con el API en el puerto 8000, desde `frontend`:
+
+```powershell
+npm install
+npm run dev
+```
+
+La consulta abre en [http://127.0.0.1:5173](http://127.0.0.1:5173). Habla solo con `/api/clientes`. Si el API no está en esa máquina, define `VITE_API_URL` antes de `npm run dev`.

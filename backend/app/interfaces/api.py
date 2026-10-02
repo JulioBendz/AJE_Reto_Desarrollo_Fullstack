@@ -2,6 +2,7 @@ from datetime import datetime
 
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, EmailStr, Field, field_validator
@@ -69,6 +70,12 @@ def crear_aplicacion(servicio: ServicioClientes) -> FastAPI:
         description="CRUD de clientes. En alta, actualizacion y baja llama primero al API publica y despues persiste en PostgreSQL.",
         docs_url="/docs",
         openapi_url="/openapi.json",
+    )
+    aplicacion.add_middleware(
+        CORSMiddleware,
+        allow_origins=["http://127.0.0.1:5173", "http://localhost:5173"],
+        allow_methods=["GET", "POST", "PUT", "DELETE"],
+        allow_headers=["Content-Type", "Accept"],
     )
 
     @aplicacion.exception_handler(RequestValidationError)

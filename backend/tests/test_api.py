@@ -74,6 +74,15 @@ def test_email_duplicado_responde_409():
     assert respuesta.status_code == 409
 
 
+def test_el_navegador_del_frontend_puede_llamar_al_api():
+    cliente, _repositorio = cliente_http([1])
+    respuesta = cliente.options(
+        "/api/clientes",
+        headers={"Origin": "http://127.0.0.1:5173", "Access-Control-Request-Method": "GET"},
+    )
+    assert respuesta.headers["access-control-allow-origin"] == "http://127.0.0.1:5173"
+
+
 def test_el_contrato_es_openapi_3_y_swagger_lista_los_cinco_metodos():
     cliente, _repositorio = cliente_http([1])
     esquema = cliente.app.openapi()
