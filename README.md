@@ -53,7 +53,7 @@ docker compose exec postgres psql -U postgres -d retoDB -c "\d cliente"
 |---|---|
 | `sudo service docker start` | Arranca el motor. Hay que repetirlo después de cada encendido de la laptop. |
 | `cd /mnt/e/...` | Entra a la carpeta del proyecto. El disco `E:` de Windows se ve en Ubuntu como `/mnt/e`. |
-| `docker compose up -d` | Crea el contenedor de PostgreSQL 17, la base `retoDB` y la tabla `cliente`. `-d` lo deja corriendo en segundo plano. |
+| `docker compose up -d` | Crea PostgreSQL 17, el backend y la pantalla. `-d` los deja corriendo en segundo plano. |
 | `docker compose exec ... \d cliente` | Muestra las columnas de `cliente`. Usuario y contraseña locales: `postgres` / `postgres`. Puerto: `5432`. |
 
 ## Pruebas del backend
@@ -107,7 +107,9 @@ Con la base levantada, desde `backend`:
 
 Swagger queda en [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs). El contrato OpenAPI 3 está en [http://127.0.0.1:8000/openapi.json](http://127.0.0.1:8000/openapi.json).
 
-## Pantalla
+`CORS_ORIGINS` lista los orígenes del navegador que pueden llamar al API. En local son la pantalla de Vite (`5173`) y la pantalla del contenedor (`8080`). No van en el código.
+
+## Pantalla en desarrollo
 
 Con el API en el puerto 8000, desde `frontend`:
 
@@ -116,4 +118,22 @@ npm install
 npm run dev
 ```
 
-La consulta abre en [http://127.0.0.1:5173](http://127.0.0.1:5173). Habla solo con `/api/clientes`. Si el API no está en esa máquina, define `VITE_API_URL` antes de `npm run dev`.
+La consulta abre en [http://127.0.0.1:5173](http://127.0.0.1:5173). Habla solo con `/api/clientes`. La plantilla del destino es `frontend/.env.example` (`VITE_API_URL`). Si no existe `frontend/.env`, el valor por defecto es `http://127.0.0.1:8000`.
+
+## Los tres contenedores
+
+Para el despliegue que pide el reto, detén el `uvicorn` y el `npm run dev` si siguen ocupando los puertos 8000 y 5173. En Ubuntu:
+
+```bash
+sudo service docker start
+cd /mnt/e/julio-bendezu/AJE_Reto_Desarrollo_Fullstack
+docker compose up -d --build
+```
+
+| Dirección | Qué es |
+|---|---|
+| [http://127.0.0.1:8080](http://127.0.0.1:8080) | Pantalla servida por el contenedor |
+| [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) | Swagger del backend en contenedor |
+| `localhost:5432` | PostgreSQL |
+
+El backend del contenedor usa el nombre `postgres` para llegar a la base. Esa dirección está en `docker-compose.yml` y reemplaza el `127.0.0.1` de `backend/.env`, que sirve cuando el API corre en Windows.

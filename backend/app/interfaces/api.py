@@ -8,6 +8,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, EmailStr, Field, field_validator
 
 from app.application.servicio_clientes import ServicioClientes
+from app.configuracion import origenes_permitidos
 from app.domain.errores import (
     ApiPublicaNoDisponible,
     ClienteNoEncontrado,
@@ -73,7 +74,7 @@ def crear_aplicacion(servicio: ServicioClientes) -> FastAPI:
     )
     aplicacion.add_middleware(
         CORSMiddleware,
-        allow_origins=["http://127.0.0.1:5173", "http://localhost:5173"],
+        allow_origins=origenes_permitidos(),
         allow_methods=["GET", "POST", "PUT", "DELETE"],
         allow_headers=["Content-Type", "Accept"],
     )
