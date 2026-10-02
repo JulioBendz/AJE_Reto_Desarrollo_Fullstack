@@ -21,8 +21,8 @@ class ApiPublica(Protocol):
     def crear(self, datos: dict) -> None:
         pass
 
-    def actualizar(self, id_cliente: int, datos: dict) -> None:
+    def actualizar(self, email_registrado: str, datos: dict) -> None:
         pass
 
-    def eliminar(self, id_cliente: int) -> None:
+    def eliminar(self, email_registrado: str) -> None:
         pass

@@ -46,7 +46,7 @@ class ServicioClientes:
     def actualizar(self, id_cliente: int, nombres: str, email: str, telefono: str | None) -> Cliente:
         cliente = self._activo(id_cliente)
         datos = self._datos(nombres, email, telefono)
-        self._api_publica.actualizar(id_cliente, datos)
+        self._api_publica.actualizar(cliente.email, datos)
         cliente.nombres = nombres
         cliente.email = email
         cliente.telefono = telefono
@@ -55,7 +55,7 @@ class ServicioClientes:
 
     def eliminar(self, id_cliente: int) -> None:
         cliente = self._activo(id_cliente)
-        self._api_publica.eliminar(id_cliente)
+        self._api_publica.eliminar(cliente.email)
         cliente.estado = ESTADO_INACTIVO
         self._repositorio.actualizar(cliente)
 

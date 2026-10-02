@@ -7,8 +7,13 @@ from app.infrastructure.api_publica_retool import ApiPublicaRetool
 
 
 class Respuesta:
-    def __init__(self, status_code: int) -> None:
+    def __init__(self, status_code: int, cuerpo: list | None = None) -> None:
         self.status_code = status_code
+        self.content = b"[]" if cuerpo is not None else b""
+        self._cuerpo = cuerpo
+
+    def json(self):
+        return self._cuerpo
 
 
 class RequestsFalso:
@@ -17,10 +22,12 @@ class RequestsFalso:
         self._status_code = status_code
         self._fallar_red = fallar_red
 
-    def __call__(self, metodo, url, json=None, timeout=None):
-        self.llamadas.append((metodo, url, json))
+    def __call__(self, metodo, url, json=None, timeout=None, params=None):
+        self.llamadas.append((metodo, url, json, params))
         if self._fallar_red:
             raise requests.ConnectionError("sin red")
+        if metodo == "GET":
+            return Respuesta(200, [{"id": 51, "email": "ana@ejemplo.com"}])
         return Respuesta(self._status_code)
 
 
@@ -40,12 +47,15 @@ def test_post_put_y_delete_usan_la_url_del_recurso(monkeypatch):
     cliente = _cliente(monkeypatch, red)
 
     cliente.crear({"nombres": "Ana"})
-    cliente.actualizar(4, {"nombres": "Ana"})
-    cliente.eliminar(4)
+    cliente.actualizar("ana@ejemplo.com", {"nombres": "Ana"})
+    cliente.eliminar("ana@ejemplo.com")
 
     assert red.llamadas[0][0:2] == ("POST", "https://retoolapi.dev/recurso/clientes")
-    assert red.llamadas[1][0:2] == ("PUT", "https://retoolapi.dev/recurso/clientes/4")
-    assert red.llamadas[2][0:2] == ("DELETE", "https://retoolapi.dev/recurso/clientes/4")
+    assert red.llamadas[1][0] == "GET"
+    assert red.llamadas[1][3] == {"email": "ana@ejemplo.com"}
+    assert red.llamadas[2][0:2] == ("PUT", "https://retoolapi.dev/recurso/clientes/51")
+    assert red.llamadas[3][0] == "GET"
+    assert red.llamadas[4][0:2] == ("DELETE", "https://retoolapi.dev/recurso/clientes/51")
 
 
 def test_el_circuito_se_abre_y_deja_de_llamar(monkeypatch):

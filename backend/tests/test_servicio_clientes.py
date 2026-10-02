@@ -96,7 +96,7 @@ def test_actualizar_llama_al_api_publica_antes_de_guardar():
     assert orden == ["api", "repositorio"]
     assert actualizado.nombres == "Ana Actualizada"
     assert api.llamadas[0][0] == "actualizar"
-    assert api.llamadas[0][1] == 6
+    assert api.llamadas[0][1] == "ana@ejemplo.com"
 
 
 def test_eliminar_da_de_baja_sin_borrar_la_fila():
@@ -110,7 +110,7 @@ def test_eliminar_da_de_baja_sin_borrar_la_fila():
     casos.eliminar(6)
 
     assert orden == ["api", "repositorio"]
-    assert api.llamadas == [("eliminar", 6)]
+    assert api.llamadas == [("eliminar", "ana@ejemplo.com")]
     assert repositorio.obtener(6).estado == 0
     assert casos.listar() == []
 

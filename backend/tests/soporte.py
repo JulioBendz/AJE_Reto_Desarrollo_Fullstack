@@ -18,11 +18,11 @@ class ApiPublicaFalsa:
     def crear(self, datos: dict) -> None:
         self._registrar("crear", datos)
 
-    def actualizar(self, id_cliente: int, datos: dict) -> None:
-        self._registrar("actualizar", id_cliente, datos)
+    def actualizar(self, email_registrado: str, datos: dict) -> None:
+        self._registrar("actualizar", email_registrado, datos)
 
-    def eliminar(self, id_cliente: int) -> None:
-        self._registrar("eliminar", id_cliente)
+    def eliminar(self, email_registrado: str) -> None:
+        self._registrar("eliminar", email_registrado)
 
     def _registrar(self, *partes) -> None:
         if self._falla:
