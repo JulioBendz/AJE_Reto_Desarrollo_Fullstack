@@ -17,7 +17,7 @@ El reto deja elegir el backend y el ORM dentro de una lista, y evalúa por separ
 | Circuit breaker | Pycircuitbreaker | Es el circuit breaker que la sección 5 nombra para Python, y el patrón es el criterio 6. |
 | ORM | SQLAlchemy | Un ORM es un objetivo del reto. SQLAlchemy es el que la sección 5 recomienda para Python. |
 | Base de datos | PostgreSQL 17 | Es la versión de la sección 5. La base se llama `retoDB`. |
-| Entorno | Docker 22 o superior y Docker Compose | Docker Compose con frontend, backend y PostgreSQL es el criterio 8. |
+| Entorno | Docker Engine y Docker Compose, dentro de Ubuntu en WSL | El criterio 8 pide Docker Compose con frontend, backend y PostgreSQL. Se usa Docker Engine, gratuito. No se usa Docker Desktop. |
 | Pruebas | pytest | El reto exige TDD y pruebas de excepciones. pytest es el ejecutor; no agrega funcionalidad. |
 | Calidad | Plugin y scanner de SonarQube | Es el criterio 7. |
 | Estilos | Ninguno al inicio | Bootstrap y Material UI son opcionales en la sección 5. |
