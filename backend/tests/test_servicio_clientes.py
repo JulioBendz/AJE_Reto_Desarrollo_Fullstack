@@ -10,6 +10,15 @@ from tests.soporte import (
 )
 
 
+def test_el_id_de_produccion_es_un_entero_en_el_rango():
+    from app.main import generar_id_aleatorio
+
+    valor = generar_id_aleatorio()
+
+    assert isinstance(valor, int)
+    assert 1 <= valor <= 2_147_483_647
+
+
 def test_crear_llama_al_api_publica_antes_de_guardar():
     orden = []
     api = ApiPublicaFalsa(orden)

@@ -19,9 +19,9 @@ export function Registro({ casos }) {
     try {
       await casos.crear(valores)
       navigate("/", { state: { aviso: "Cliente registrado" } })
-    } catch (error_) {
-      setErrores(error_.errores || {})
-      if (!error_.errores) setAviso(error_.message)
+    } catch (fallo) {
+      setErrores(fallo.errores || {})
+      if (!fallo.errores) setAviso(fallo.message)
     } finally {
       setEnviando(false)
     }

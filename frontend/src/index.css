@@ -89,7 +89,7 @@ th, td {
   vertical-align: top;
 }
 
-.aviso, .campo-error { display: block; margin: 8px 0; }
+.aviso, .campo-error { margin: 8px 0; }
 
 .aviso-ok { color: #166534; }
 

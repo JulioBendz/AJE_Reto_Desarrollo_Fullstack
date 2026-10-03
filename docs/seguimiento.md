@@ -12,8 +12,8 @@ El porcentaje es ítems marcados dividido entre ítems del checklist. Cada ítem
 |        |     |
 | ------ | --- |
 | Ítems  | 25  |
-| Hechos | 22  |
-| Avance | 88 % |
+| Hechos | 25  |
+| Avance | 100 % |
 
 
 
@@ -23,8 +23,8 @@ El porcentaje es ítems marcados dividido entre ítems del checklist. Cada ítem
 | Backend                | [§4.2](spec/reto-desarrollo-fullstack.md#42-backend-en-nodejs-o-phyton), [§6.4](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.5](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto)                                                                    | 7     | 7      |
 | Integración            | [§4.3](spec/reto-desarrollo-fullstack.md#43-integración-api-pública-retoolcom), [§6.6](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto)                                                                                                                                           | 3     | 3      |
 | Frontend               | [§4.4](spec/reto-desarrollo-fullstack.md#44-frontend), [§6.3](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto)                                                                                                                                                                    | 6     | 6      |
-| Arquitectura y calidad | [§2](spec/reto-desarrollo-fullstack.md#2-objetivos-del-reto), [§6.1](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.2](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.7](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto) | 4     | 2      |
-| Entorno y entrega      | [§6.8](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.9](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§7](spec/reto-desarrollo-fullstack.md#7-entregable)                                                                                       | 3     | 2      |
+| Arquitectura y calidad | [§2](spec/reto-desarrollo-fullstack.md#2-objetivos-del-reto), [§6.1](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.2](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.7](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto) | 4     | 4      |
+| Entorno y entrega      | [§6.8](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§6.9](spec/reto-desarrollo-fullstack.md#6-criterios-de-evaluación-del-reto), [§7](spec/reto-desarrollo-fullstack.md#7-entregable)                                                                                       | 3     | 3      |
 
 
 
@@ -81,8 +81,8 @@ Referencia: criterios [1](spec/reto-desarrollo-fullstack.md#6-criterios-de-evalu
 
 - [x] Frontend y backend organizados con Clean Architecture
 - [x] Persistencia con un ORM sobre PostgreSQL
-- [ ] Pruebas unitarias en verde, con flujos de excepción, escritas al estilo TDD
-- [ ] SonarQube en el IDE y scanner con las métricas de calidad cumplidas
+- [x] Pruebas unitarias en verde, con flujos de excepción, escritas al estilo TDD
+- [x] SonarQube en el IDE y scanner con las métricas de calidad cumplidas
 
 
 
@@ -92,7 +92,7 @@ Referencia: criterios [8](spec/reto-desarrollo-fullstack.md#6-criterios-de-evalu
 
 - [x] `docker-compose` levanta frontend, backend y PostgreSQL
 - [x] README con el procedimiento de instalación y ejecución
-- [ ] Zip de entrega con el nombre y el apellido
+- [x] Zip de entrega con el nombre y el apellido
 
 
 
