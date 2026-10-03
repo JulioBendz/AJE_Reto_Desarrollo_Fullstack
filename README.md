@@ -147,7 +147,9 @@ cd /mnt/e/julio-bendezu/AJE_Reto_Desarrollo_Fullstack
 docker compose -f docker-compose.sonar.yml up -d
 ```
 
-Cuando [http://127.0.0.1:9000](http://127.0.0.1:9000) responda, entra con `admin` / `admin` y cambia la contraseña que pide el primer acceso. En el IDE, el plugin que nombra el reto es **SonarQube for IDE**. En Cursor o VS Code se instala desde el marketplace y se conecta a ese servidor.
+Cuando [http://127.0.0.1:9000](http://127.0.0.1:9000) responda, un servidor recién creado entra con `admin` / `admin` y obliga a cambiar esa contraseña. En esta máquina el cambio ya está hecho. La clave queda solo en `sonar-admin.local`, fuera del repositorio.
+
+En el IDE, el plugin que nombra el reto es **SonarQube for IDE**. En Cursor o VS Code se instala desde el marketplace y se conecta a ese servidor con un token del usuario `admin`.
 
 Las pruebas con cobertura, desde cada carpeta:
 

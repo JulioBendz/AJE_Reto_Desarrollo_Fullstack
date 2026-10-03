@@ -138,6 +138,18 @@ def test_actualizar_y_eliminar_no_llaman_al_api_si_no_existe():
     assert api.llamadas == []
 
 
+def test_actualizar_en_memoria_rechaza_un_id_inexistente():
+    repositorio = RepositorioEnMemoria()
+    cliente = Cliente(9, "Ana Ruiz", "ana@ejemplo.com", None, AHORA, 1)
+
+    try:
+        repositorio.actualizar(cliente)
+    except KeyError as error:
+        assert error.args == (9,)
+        return
+    raise AssertionError("debio fallar")
+
+
 def test_email_duplicado_al_crear():
     repositorio = RepositorioEnMemoria()
     cliente_guardado(repositorio, 1)

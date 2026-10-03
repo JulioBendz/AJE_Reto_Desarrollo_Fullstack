@@ -41,5 +41,8 @@ describe("apiClientes", () => {
 
     vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("fallo")))
     await expect(apiClientes.listar()).rejects.toThrow("No se pudo contactar al backend")
+
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ status: 500, ok: false, json: async () => { throw new Error("no-json") } }))
+    await expect(apiClientes.listar()).rejects.toThrow("No se pudo completar la operación")
   })
 })
