@@ -19,8 +19,8 @@ export function Consulta({ casos }) {
     try {
       setClientes(await casos.listar())
       setError("")
-    } catch (fallo) {
-      setError(fallo.message)
+    } catch (error_) {
+      setError(error_.message)
     }
   }
 
@@ -41,8 +41,8 @@ export function Consulta({ casos }) {
       await casos.eliminar(id)
       setAviso("Cliente eliminado")
       setClientes(await casos.listar())
-    } catch (fallo) {
-      setError(fallo.message)
+    } catch (error_) {
+      setError(error_.message)
     }
   }
 

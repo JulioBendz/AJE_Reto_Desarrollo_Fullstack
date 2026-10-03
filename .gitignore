@@ -11,3 +11,5 @@ coverage/
 coverage.xml
 .scannerwork/
 *.zip
+sonar-token.json
+sonar-token.local

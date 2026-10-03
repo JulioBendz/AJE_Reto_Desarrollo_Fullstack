@@ -21,7 +21,7 @@ export function Edicion({ casos }) {
           telefono: cliente.telefono || "",
         }),
       )
-      .catch((fallo) => setAviso(fallo.message))
+      .catch((error_) => setAviso(error_.message))
   }, [casos, id])
 
   async function guardar() {
@@ -31,9 +31,9 @@ export function Edicion({ casos }) {
     try {
       await casos.actualizar(id, valores)
       navigate("/", { state: { aviso: "Cliente actualizado" } })
-    } catch (fallo) {
-      setErrores(fallo.errores || {})
-      if (!fallo.errores) setAviso(fallo.message)
+    } catch (error_) {
+      setErrores(error_.errores || {})
+      if (!error_.errores) setAviso(error_.message)
     } finally {
       setEnviando(false)
     }

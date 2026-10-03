@@ -102,7 +102,6 @@ def crear_aplicacion(servicio: ServicioClientes) -> FastAPI:
     @aplicacion.post(
         "/api/clientes",
         status_code=201,
-        response_model=IdRespuesta,
         summary="Crear cliente",
         responses={codigo: _errores[codigo] for codigo in (400, 409, 503)},
     )
@@ -110,13 +109,12 @@ def crear_aplicacion(servicio: ServicioClientes) -> FastAPI:
         nuevo_id = servicio.crear(entrada.nombres, str(entrada.email), entrada.telefono)
         return IdRespuesta(id=nuevo_id)
 
-    @aplicacion.get("/api/clientes", response_model=list[ClienteRespuesta], summary="Listar clientes activos")
+    @aplicacion.get("/api/clientes", summary="Listar clientes activos")
     def listar() -> list[ClienteRespuesta]:
         return [_respuesta(cliente) for cliente in servicio.listar()]
 
     @aplicacion.get(
         "/api/clientes/{id_cliente}",
-        response_model=ClienteRespuesta,
         summary="Obtener cliente por id",
         responses={404: _errores[404]},
     )
@@ -125,7 +123,6 @@ def crear_aplicacion(servicio: ServicioClientes) -> FastAPI:
 
     @aplicacion.put(
         "/api/clientes/{id_cliente}",
-        response_model=ClienteRespuesta,
         summary="Actualizar cliente",
         responses={codigo: _errores[codigo] for codigo in (400, 404, 409, 503)},
     )

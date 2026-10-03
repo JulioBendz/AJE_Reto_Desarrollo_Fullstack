@@ -137,3 +137,25 @@ docker compose up -d --build
 | `localhost:5432` | PostgreSQL |
 
 El backend del contenedor usa el nombre `postgres` para llegar a la base. Esa dirección está en `docker-compose.yml` y reemplaza el `127.0.0.1` de `backend/.env`, que sirve cuando el API corre en Windows.
+
+## Calidad con SonarQube
+
+El servidor de análisis no forma parte de los tres contenedores de la aplicación. Se levanta aparte:
+
+```bash
+cd /mnt/e/julio-bendezu/AJE_Reto_Desarrollo_Fullstack
+docker compose -f docker-compose.sonar.yml up -d
+```
+
+Cuando [http://127.0.0.1:9000](http://127.0.0.1:9000) responda, entra con `admin` / `admin` y cambia la contraseña que pide el primer acceso. En el IDE, el plugin que nombra el reto es **SonarQube for IDE**. En Cursor o VS Code se instala desde el marketplace y se conecta a ese servidor.
+
+Las pruebas con cobertura, desde cada carpeta:
+
+```powershell
+cd backend
+.\.venv\Scripts\python -m pytest --cov=app --cov-report=term-missing --cov-report=xml
+cd ..\frontend
+npm test -- --coverage
+```
+
+El scanner usa `sonar-project.properties` y un token creado en el servidor. No se guarda el token en el repositorio.

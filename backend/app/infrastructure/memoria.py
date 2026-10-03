@@ -17,6 +17,8 @@ class RepositorioEnMemoria:
         self._clientes[cliente.id] = cliente
 
     def actualizar(self, cliente: Cliente) -> None:
+        if self.obtener(cliente.id) is None:
+            raise KeyError(cliente.id)
         self._exigir_email_libre(cliente)
         self._clientes[cliente.id] = cliente
 

@@ -1,5 +1,5 @@
 from datetime import datetime
-from random import randint
+from secrets import randbelow
 
 from app.application.servicio_clientes import ServicioClientes
 from app.infrastructure.api_publica_retool import crear_api_publica
@@ -9,7 +9,7 @@ from app.interfaces.api import crear_aplicacion
 
 
 def generar_id_aleatorio() -> int:
-    return randint(1, 2_147_483_647)
+    return randbelow(2_147_483_647) + 1
 
 
 aplicacion = crear_aplicacion(
