@@ -149,9 +149,16 @@ docker compose -f docker-compose.sonar.yml up -d
 
 Cuando [http://127.0.0.1:9000](http://127.0.0.1:9000) responda, un servidor recién creado entra con `admin` / `admin` y obliga a cambiar esa contraseña. En esta máquina el cambio ya está hecho. La clave queda solo en `sonar-admin.local`, fuera del repositorio.
 
-En el IDE, el plugin que nombra el reto es **SonarQube for IDE**. En Cursor o VS Code se instala desde el marketplace y se conecta a ese servidor con un token del usuario `admin`.
+En el IDE, el plugin que nombra el reto es **SonarQube for IDE**. Conéctalo así:
 
-Las pruebas con cobertura, desde cada carpeta:
+1. En [http://127.0.0.1:9000](http://127.0.0.1:9000), avatar → My Account → Security → Generate Tokens. Tipo User Token, nombre `cursor`. Copia el token; no lo subas al repositorio.
+2. En Cursor, `Ctrl+Shift+P` → **SonarQube: Focus on SonarQube View**.
+3. En ese panel, **Add SonarQube Server Connection**. URL `http://127.0.0.1:9000`, el token y un nombre, por ejemplo `Reto local`.
+4. **Bind this workspace to a SonarQube project** y elige `Reto clientes` (`aje-reto-clientes`).
+
+Esa conexión subraya en el editor las reglas del servidor. La puerta de calidad la sigue calculando el scanner, no el plugin.
+
+Las pruebas con cobertura, desde cada carpeta. Pytest escribe `.coverage` (dato interno) y `coverage.xml` (lo que lee Sonar). Vitest escribe `frontend/coverage/lcov.info`.
 
 ```powershell
 cd backend
@@ -160,4 +167,10 @@ cd ..\frontend
 npm test -- --coverage
 ```
 
-El scanner usa `sonar-project.properties` y un token creado en el servidor. No se guarda el token en el repositorio.
+El informe de Python queda con la ruta `backend/app`, que es la que el scanner encuentra desde la raíz. Luego, en Ubuntu:
+
+```bash
+bash escanear-sonar.sh
+```
+
+El scanner usa `sonar-project.properties` y el token de `sonar-token.local`. Ninguno de los dos tokens se guarda en el repositorio.

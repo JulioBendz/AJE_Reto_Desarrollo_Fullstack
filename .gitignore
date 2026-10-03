@@ -9,6 +9,7 @@ node_modules/
 dist/
 coverage/
 coverage.xml
+.coverage
 .scannerwork/
 *.zip
 sonar-token.json
