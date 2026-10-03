@@ -1,6 +1,6 @@
 # Reto de Desarrollo Fullstack
 
-Aplicación CRUD de clientes con frontend React, backend, API pública de Retool y PostgreSQL. El alcance está cerrado en la especificación; el avance se anota aparte.
+Aplicación CRUD de clientes con frontend React, backend FastAPI, API pública de Retool y PostgreSQL.
 
 - Especificación: [docs/spec/reto-desarrollo-fullstack.md](docs/spec/reto-desarrollo-fullstack.md)
 - Stack: [docs/adr/0001-stack-del-reto.md](docs/adr/0001-stack-del-reto.md)
@@ -8,7 +8,7 @@ Aplicación CRUD de clientes con frontend React, backend, API pública de Retool
 
 Stack fijado: React 18, FastAPI, SQLAlchemy, Requests, Pycircuitbreaker, PostgreSQL 17 y Docker Compose.
 
-El contenedor se levanta con **Docker Engine** dentro de Ubuntu en WSL. Es el Docker gratuito. No se usa Docker Desktop.
+El despliegue local usa Docker Engine y Docker Compose. El mismo `docker-compose.yml` lo lee Docker Desktop.
 
 ## Base de datos local
 
@@ -37,7 +37,7 @@ sudo usermod -aG docker $USER
 | `sudo chmod a+r ...` | Permite que el sistema lea la clave. |
 | `echo "deb ..." \| sudo tee ...` | Agrega el repositorio estable de Docker Engine a Ubuntu. |
 | `sudo apt-get update` | Vuelve a leer la lista, ahora con ese repositorio. |
-| `sudo apt-get install -y docker-ce ... docker-compose-plugin` | Instala el motor gratuito y `docker compose`. |
+| `sudo apt-get install -y docker-ce ... docker-compose-plugin` | Instala Docker Engine y `docker compose`. |
 | `sudo usermod -aG docker $USER` | Permite usar Docker sin `sudo` en la siguiente sesión. |
 
 Si Docker ya está instalado, omite el bloque anterior. Cierra Ubuntu, ábrelo de nuevo y entra a la carpeta del proyecto: la que contiene `docker-compose.yml`. En Ubuntu, un disco de Windows se ve bajo `/mnt/`. Como guía, un proyecto en el disco `E:` se abre así:
@@ -49,8 +49,6 @@ cd /mnt/e/julio-bendezu/AJE_Reto_Desarrollo_Fullstack
 Quien clone el repositorio o descomprima el zip sustituye esa ruta por la suya. Los comandos de abajo se ejecutan dentro de la carpeta del proyecto. Compose exige que exista `backend/.env`; la plantilla es `backend/.env.example`.
 
 ```bash
-# Ejemplo de carpeta en Ubuntu. Quien revise usa la suya.
-# cd /mnt/e/julio-bendezu/AJE_Reto_Desarrollo_Fullstack
 sudo service docker start
 cp backend/.env.example backend/.env
 docker compose up -d
@@ -60,7 +58,7 @@ docker compose exec postgres psql -U postgres -d retoDB -c "\d cliente"
 | Comando | Qué hace |
 |---|---|
 | `sudo service docker start` | Arranca el motor. Hay que repetirlo después de cada inicio de Windows. |
-| `cd /mnt/e/...` | Ejemplo para entrar a la carpeta del proyecto. En Ubuntu, el disco `E:` de Windows se ve como `/mnt/e`. Quien revise usa su propia ruta. |
+| `cd /mnt/e/...` | Ejemplo para entrar a la carpeta. En Ubuntu, el disco `E:` de Windows se ve como `/mnt/e`. |
 | `cp backend/.env.example backend/.env` | Crea la configuración local. Después se reemplaza la URL de Retool. |
 | `docker compose up -d` | Crea PostgreSQL 17, el backend y la pantalla. `-d` los deja corriendo en segundo plano. |
 | `docker compose exec ... \d cliente` | Muestra las columnas de `cliente`. Usuario y contraseña locales: `postgres` / `postgres`. Puerto: `5432`. |
@@ -154,8 +152,6 @@ Para el despliegue que pide el reto, detén el `uvicorn` y el `npm run dev` si s
 En la misma carpeta del proyecto:
 
 ```bash
-# Ejemplo de carpeta en Ubuntu. Quien revise usa la suya.
-# cd /mnt/e/julio-bendezu/AJE_Reto_Desarrollo_Fullstack
 sudo service docker start
 docker compose up -d --build
 ```
@@ -175,8 +171,6 @@ El servidor de análisis no forma parte de los tres contenedores de la aplicaci�
 En la misma carpeta del proyecto:
 
 ```bash
-# Ejemplo de carpeta en Ubuntu. Quien revise usa la suya.
-# cd /mnt/e/julio-bendezu/AJE_Reto_Desarrollo_Fullstack
 docker compose -f docker-compose.sonar.yml up -d
 bash scripts/esperar-sonar.sh
 ```
@@ -220,8 +214,6 @@ npm test -- --coverage
 El informe de Python queda con la ruta `backend/app`, que es la que el scanner encuentra desde la raíz. Luego, en Ubuntu:
 
 ```bash
-# Ejemplo de carpeta en Ubuntu. Quien revise usa la suya.
-# cd /mnt/e/julio-bendezu/AJE_Reto_Desarrollo_Fullstack
 bash scripts/escanear-sonar.sh
 ```
 
