@@ -40,19 +40,28 @@ sudo usermod -aG docker $USER
 | `sudo apt-get install -y docker-ce ... docker-compose-plugin` | Instala el motor gratuito y `docker compose`. |
 | `sudo usermod -aG docker $USER` | Permite usar Docker sin `sudo` en la siguiente sesión. |
 
-Cierra Ubuntu, ábrelo de nuevo y levanta la base:
+Si Docker ya está instalado, omite el bloque anterior. Cierra Ubuntu, ábrelo de nuevo y entra a la carpeta del proyecto: la que contiene `docker-compose.yml`. En Ubuntu, un disco de Windows se ve bajo `/mnt/`. Como guía, un proyecto en el disco `E:` se abre así:
 
 ```bash
-sudo service docker start
 cd /mnt/e/julio-bendezu/AJE_Reto_Desarrollo_Fullstack
+```
+
+Quien clone el repositorio o descomprima el zip sustituye esa ruta por la suya. Los comandos de abajo se ejecutan dentro de la carpeta del proyecto. Compose exige que exista `backend/.env`; la plantilla es `backend/.env.example`.
+
+```bash
+# Ejemplo de carpeta en Ubuntu. Quien revise usa la suya.
+# cd /mnt/e/julio-bendezu/AJE_Reto_Desarrollo_Fullstack
+sudo service docker start
+cp backend/.env.example backend/.env
 docker compose up -d
 docker compose exec postgres psql -U postgres -d retoDB -c "\d cliente"
 ```
 
 | Comando | Qué hace |
 |---|---|
-| `sudo service docker start` | Arranca el motor. Hay que repetirlo después de cada encendido de la laptop. |
-| `cd /mnt/e/...` | Entra a la carpeta del proyecto. El disco `E:` de Windows se ve en Ubuntu como `/mnt/e`. |
+| `sudo service docker start` | Arranca el motor. Hay que repetirlo después de cada inicio de Windows. |
+| `cd /mnt/e/...` | Ejemplo para entrar a la carpeta del proyecto. En Ubuntu, el disco `E:` de Windows se ve como `/mnt/e`. Quien revise usa su propia ruta. |
+| `cp backend/.env.example backend/.env` | Crea la configuración local. Después se reemplaza la URL de Retool. |
 | `docker compose up -d` | Crea PostgreSQL 17, el backend y la pantalla. `-d` los deja corriendo en segundo plano. |
 | `docker compose exec ... \d cliente` | Muestra las columnas de `cliente`. Usuario y contraseña locales: `postgres` / `postgres`. Puerto: `5432`. |
 
@@ -64,19 +73,31 @@ La mayoría usa un repositorio en memoria y un Retool falso: no escribe en Postg
 
 El recorrido real, Retool y después PostgreSQL, se hace con el servidor en marcha: desde Swagger o desde la pantalla.
 
-```bash
+El entorno virtual se llama `.venv` en los dos sistemas. Cambia la carpeta de los ejecutables y la barra, según el sistema. En Windows la carpeta es `Scripts` y la barra es `\`. En Ubuntu la carpeta es `bin` y la barra es `/`. El comando de Windows no funciona dentro de Ubuntu, y al revés tampoco.
+
+En Windows, desde `backend`:
+
+```powershell
 cd backend
 python -m venv .venv
-.venv\Scripts\pip install -r requirements.txt
-.venv\Scripts\pytest
+.\.venv\Scripts\pip install -r requirements.txt
+.\.venv\Scripts\pytest
+```
+
+En Ubuntu, desde la carpeta del proyecto:
+
+```bash
+cd backend
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+.venv/bin/pytest
 ```
 
 ## Configuración local
 
-Las URLs y credenciales de esta máquina van en `backend/.env`. Ese archivo no se sube a Git. La plantilla que sí se versiona es `backend/.env.example`.
+Las URLs locales van en `backend/.env`. Ese archivo no se sube a Git ni va en el zip. La plantilla que sí se entrega es `backend/.env.example`. Si el arranque con Docker ya lo copió, no hace falta crearlo otra vez. En Windows, desde `backend`:
 
 ```powershell
-cd backend
 copy .env.example .env
 ```
 
@@ -95,14 +116,20 @@ Abre `backend/.env` y reemplaza solo el valor de `RETOOL_API_URL`. No la pegues 
 RETOOL_API_URL=https://retoolapi.dev/AbC123/clientes
 ```
 
-`DATABASE_URL` ya apunta al PostgreSQL local del `docker compose`. No hace falta cambiarla. Esa cadena vive solo en `.env`; el código la lee y no la repite.
+`DATABASE_URL` apunta a `127.0.0.1` para cuando el API corre en Windows. Dentro de Compose esa variable se reemplaza por el servicio `postgres`. No hace falta cambiarla. El código la lee desde `.env` y no la repite.
 
 ## Contrato del API
 
-Con la base levantada, desde `backend`:
+Con la base levantada, desde `backend`. En Windows:
 
 ```powershell
 .\.venv\Scripts\uvicorn app.main:aplicacion --reload
+```
+
+En Ubuntu:
+
+```bash
+.venv/bin/uvicorn app.main:aplicacion --reload
 ```
 
 Swagger queda en [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs). El contrato OpenAPI 3 está en [http://127.0.0.1:8000/openapi.json](http://127.0.0.1:8000/openapi.json).
@@ -124,9 +151,12 @@ La consulta abre en [http://127.0.0.1:5173](http://127.0.0.1:5173). Habla solo c
 
 Para el despliegue que pide el reto, detén el `uvicorn` y el `npm run dev` si siguen ocupando los puertos 8000 y 5173. En Ubuntu:
 
+En la misma carpeta del proyecto:
+
 ```bash
+# Ejemplo de carpeta en Ubuntu. Quien revise usa la suya.
+# cd /mnt/e/julio-bendezu/AJE_Reto_Desarrollo_Fullstack
 sudo service docker start
-cd /mnt/e/julio-bendezu/AJE_Reto_Desarrollo_Fullstack
 docker compose up -d --build
 ```
 
@@ -142,12 +172,22 @@ El backend del contenedor usa el nombre `postgres` para llegar a la base. Esa di
 
 El servidor de análisis no forma parte de los tres contenedores de la aplicación. Se levanta aparte:
 
+En la misma carpeta del proyecto:
+
 ```bash
-cd /mnt/e/julio-bendezu/AJE_Reto_Desarrollo_Fullstack
+# Ejemplo de carpeta en Ubuntu. Quien revise usa la suya.
+# cd /mnt/e/julio-bendezu/AJE_Reto_Desarrollo_Fullstack
 docker compose -f docker-compose.sonar.yml up -d
+bash scripts/esperar-sonar.sh
 ```
 
-Cuando [http://127.0.0.1:9000](http://127.0.0.1:9000) responda, un servidor recién creado entra con `admin` / `admin` y obliga a cambiar esa contraseña. En esta máquina el cambio ya está hecho. La clave queda solo en `sonar-admin.local`, fuera del repositorio.
+Cuando [http://127.0.0.1:9000](http://127.0.0.1:9000) responda, un servidor recién creado entra con `admin` / `admin` y obliga a cambiar esa contraseña. Escribe la clave nueva en una sola línea dentro de `sonar-admin.local`, en la raíz. Ese archivo no se sube a Git ni va en el zip. Después:
+
+```bash
+bash scripts/preparar-sonar.sh
+```
+
+Eso guarda el token del scanner en `sonar-token.local`, también fuera del repositorio.
 
 En el IDE, el plugin que nombra el reto es **SonarQube for IDE**. Conéctalo así:
 
@@ -159,6 +199,8 @@ Esa conexión subraya en el editor las reglas del servidor. La puerta de calidad
 
 Las pruebas con cobertura, desde cada carpeta. Pytest escribe `.coverage` (dato interno) y `coverage.xml` (lo que lee Sonar). Vitest escribe `frontend/coverage/lcov.info`.
 
+En Windows:
+
 ```powershell
 cd backend
 .\.venv\Scripts\python -m pytest --cov=app --cov-report=term-missing --cov-report=xml
@@ -166,10 +208,21 @@ cd ..\frontend
 npm test -- --coverage
 ```
 
+En Ubuntu, con la misma barra `/` y la carpeta `bin`:
+
+```bash
+cd backend
+.venv/bin/python -m pytest --cov=app --cov-report=term-missing --cov-report=xml
+cd ../frontend
+npm test -- --coverage
+```
+
 El informe de Python queda con la ruta `backend/app`, que es la que el scanner encuentra desde la raíz. Luego, en Ubuntu:
 
 ```bash
-bash escanear-sonar.sh
+# Ejemplo de carpeta en Ubuntu. Quien revise usa la suya.
+# cd /mnt/e/julio-bendezu/AJE_Reto_Desarrollo_Fullstack
+bash scripts/escanear-sonar.sh
 ```
 
 El scanner usa `sonar-project.properties` y el token de `sonar-token.local`. Ninguno de los dos tokens se guarda en el repositorio.
