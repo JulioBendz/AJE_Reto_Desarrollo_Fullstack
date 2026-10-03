@@ -1,10 +1,8 @@
 # Seguimiento del reto
 
-La especificación no se edita para anotar avance. La fuente es [reto-desarrollo-fullstack.md](spec/reto-desarrollo-fullstack.md). Este archivo es el único que se actualiza al cerrar un ítem.
+Lista de lo que pide la especificación y cómo quedó cada ítem. La fuente es [reto-desarrollo-fullstack.md](spec/reto-desarrollo-fullstack.md). La especificación no se modifica.
 
-Marca `[x]` solo cuando el ítem se puede demostrar (prueba en verde, contenedor levantado, pantalla usable o archivo entregable). Un ítem empezado sigue en `[ ]`.
-
-El porcentaje es ítems marcados dividido entre ítems del checklist. Cada ítem pesa lo mismo. No hay nota por bloque: un bloque al 100 % no compensa otro en cero.
+Un ítem está marcado cuando se puede demostrar: prueba en verde, contenedor levantado, pantalla usable o archivo entregable. Cada ítem pesa lo mismo. El porcentaje es ítems cerrados dividido entre el total.
 
 ## Resumen
 
@@ -96,7 +94,7 @@ Referencia: criterios [8](spec/reto-desarrollo-fullstack.md#6-criterios-de-evalu
 
 
 
-## Orden de trabajo
+## Orden de construcción
 
 1. Stack fijado en [ADR 0001](adr/0001-stack-del-reto.md): React 18, React Router, Fetch API, FastAPI, Requests, Pycircuitbreaker, SQLAlchemy, PostgreSQL 17, Docker Compose, pytest y SonarQube. Sin librería de estilos hasta cerrar el checklist.
 2. `docker-compose` con PostgreSQL y la tabla `cliente`.
