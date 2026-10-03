@@ -152,9 +152,8 @@ Cuando [http://127.0.0.1:9000](http://127.0.0.1:9000) responda, un servidor reci
 En el IDE, el plugin que nombra el reto es **SonarQube for IDE**. Conéctalo así:
 
 1. En [http://127.0.0.1:9000](http://127.0.0.1:9000), avatar → My Account → Security → Generate Tokens. Tipo User Token, nombre `cursor`. Copia el token; no lo subas al repositorio.
-2. En Cursor, `Ctrl+Shift+P` → **SonarQube: Focus on SonarQube View**.
-3. En ese panel, **Add SonarQube Server Connection**. URL `http://127.0.0.1:9000`, el token y un nombre, por ejemplo `Reto local`.
-4. **Bind this workspace to a SonarQube project** y elige `Reto clientes` (`aje-reto-clientes`).
+2. En Cursor, `Ctrl+Shift+P` → **SonarQube: Connect to SonarQube Server**. Ahí van la URL `http://127.0.0.1:9000`, el token y un nombre, por ejemplo `Reto local`.
+3. Otra vez `Ctrl+Shift+P` → **SonarQube: Bind all workspace folders to SonarQube (Server, Cloud)** y elige `Reto clientes` (`aje-reto-clientes`).
 
 Esa conexión subraya en el editor las reglas del servidor. La puerta de calidad la sigue calculando el scanner, no el plugin.
 
