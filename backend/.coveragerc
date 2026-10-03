@@ -1,0 +1,6 @@
+[run]
+relative_files = True
+source = app
+
+[xml]
+output = coverage.xml
